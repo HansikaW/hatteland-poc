@@ -16,6 +16,11 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using WebAPI.Models;
+using WebAPI.Data;
+using WebAPI.Handler;
+using WebAPI.Repositories;
+using AutoMapper;
+//using AutoMapper;
 
 namespace WebAPI
 {
@@ -48,6 +53,8 @@ namespace WebAPI
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<AuthenticationContext>();
 
+            //services.AddAutoMapper(typeof(Startup));
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -58,11 +65,26 @@ namespace WebAPI
             }
             );
 
-            services.AddCors();
+           // services.AddCors();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin",
+                    builder => builder.WithOrigins("http://localhost:4200"));
+            });
+
+            services.AddScoped<IEmployeeDetailRepository, EmployeeDetailRepository>();
+            services.AddScoped< IEmployeeDetailsHandler, EmployeeDetailHandler>();
+
+            IMapper _mapper = Mapper.Mapper.GetMapper();
+            services.AddSingleton(_mapper);
+
 
             //Jwt Authentication
 
-            var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
+            var config = Configuration["ApplicationSettings:JWT_Secret"].ToString();
+
+            var key = Encoding.UTF8.GetBytes(config);
 
             services.AddAuthentication(x =>
             {
@@ -83,6 +105,7 @@ namespace WebAPI
                 };
             });
 
+            services.AddTransient<IEmployeeDetailsHandler, EmployeeDetailHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,6 +124,7 @@ namespace WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
             }
 
             app.UseCors(builder =>

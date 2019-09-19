@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { EmployeeDetailService } from 'src/app/shared/employee-detail.service';
 import { EmployeeDetail } from 'src/app/shared/employee-detail.model';
 import {NgForm} from '@angular/forms';

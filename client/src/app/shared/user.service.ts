@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators, EmailValidator, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import{ HttpClient, HttpHeaders} from "@angular/common/http";
-import { post } from 'selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +16,8 @@ export class UserService {
     Email: ['', Validators.email],
     FullName: [''],
     Passwords: this.fb.group({
-      Password: ['', [Validators.required, Validators.minLength(4)]],
-      ConfirmPassword: ['', Validators.required]
+       Password: ['', [Validators.required, Validators.minLength(4)]],
+       ConfirmPassword: ['', Validators.required]
     }, { validator: this.comparePasswords })
 
   });

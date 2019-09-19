@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
 import { EmployeeDetail } from './employee-detail.model';
-import{ HttpClient } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeDetailService {
-  formData:EmployeeDetail;
+  formData: EmployeeDetail;
 
   readonly rootURL = 'http://localhost:51417/api';
   list: EmployeeDetail[];
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  postEmployeeDetail(){
-   return this.http.post(this.rootURL+'/EmployeeDetail',this.formData);
+  postEmployeeDetail() {
+    return this.http.post<EmployeeDetail[]>(this.rootURL + '/EmployeeDetail', this.formData);
   }
 
-  putEmployeeDetail(){
-    return this.http.put(this.rootURL+'/EmployeeDetail/'+this.formData.EId, this.formData);
-   }
-
-  deleteEmployeeDetail(id){
-   return this.http.delete(this.rootURL+'/EmployeeDetail/'+id);
+  putEmployeeDetail() {
+    return this.http.put('/api/EmployeeDetail/' + this.formData.EId, this.formData);
   }
 
-  refreshlist(){
+  deleteEmployeeDetail(id) {
+    return this.http.delete(this.rootURL + '/EmployeeDetail/' + id);
+  }
+
+  refreshlist() {
     this.http.get(this.rootURL + '/EmployeeDetail')
-    .toPromise()
-    .then(res => this.list = res as EmployeeDetail[]);
+      .toPromise()
+      .then(res => this.list = res as EmployeeDetail[]);
   }
 }

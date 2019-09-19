@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import{ HttpClientModule } from "@angular/common/http";
+//import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import{ HttpClientModule, HttpClient} from "@angular/common/http";
+import { RouterModule } from '@angular/router';
+
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,16 +26,25 @@ import { EmployeeDetailService } from './shared/employee-detail.service';
     LoginComponent,
     HomeComponent,
     EmployeeDetailComponent,
-    EmployeeDetailListComponent
+    EmployeeDetailListComponent,
+  ],
+  exports: [ 
+      EmployeeDetailComponent, 
+      EmployeeDetailListComponent,
+      FormsModule 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule,
+    CommonModule
   ],
-  providers: [UserService , EmployeeDetailService],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  providers: [UserService , EmployeeDetailService, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export class CustomModule {}

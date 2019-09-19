@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
 import { UserService } from 'src/app/shared/user.service';
 import { Router } from '@angular/router';
 
@@ -9,13 +11,12 @@ import { Router } from '@angular/router';
   styles: []
 })
 export class LoginComponent implements OnInit {
- 
-  formModel={
+  formModel = {
    UserName: '',
    Password:''
  } 
  
-  constructor(private service:UserService, private router: Router) { }
+  constructor(private service:UserService, private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
     if(localStorage.getItem('token') != null)
