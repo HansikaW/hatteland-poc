@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class UserProfileController : ControllerBase
     {
-        private UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         public UserProfileController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;

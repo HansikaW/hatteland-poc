@@ -5,49 +5,37 @@ using WebAPI.Models;
 using WebAPI.Handler;
 using System.Linq;
 using System;
+using Microsoft.Extensions.Logging;
+
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    /* public class EmployeeDetailController : ControllerBase
-     {
-         private readonly AuthenticationContext _context;
-
-         public EmployeeDetailController(AuthenticationContext context)
-         {
-             _context = context;
-         }*/
-
+   
     public class EmployeeDetailController : ControllerBase
     {
-        // private IEmployeeDetailsHandler _employeeHandler { get; set; }
-        // private readonly IEmployeeDetailsHandler _handler;
-        //private readonly AuthenticationContext _context;
-        private IEmployeeDetailsHandler _handler;
 
+        private readonly IEmployeeDetailsHandler _handler;
+        private readonly ILogger<EmployeeDetailController> _logger;
+        
 
-        public EmployeeDetailController(IEmployeeDetailsHandler handler)
+        public EmployeeDetailController(IEmployeeDetailsHandler handler, ILogger<EmployeeDetailController> logger)
         {
             _handler = handler;
+            _logger = logger;
+           
         }
 
-        // GET: api/EmployeeDetail
-        // [HttpGet]
-        /* public IEnumerable<EmployeeDetail> GetEmployeeDetails()
-         {
-             return _context.EmployeeDetails;
-         }*/
 
         // GET: api/EmployeeDetail
         [HttpGet]
         public async Task<ActionResult> GetEmployeeDetails()
         {
-            // var employeeDetails = await _handler.GetEmployeeDetailsAsync();
-            // return (employeeDetails);
             try
             {
                 var posts = await _handler.GetEmployeeDetails();
+                _logger.LogInformation("Message displayed: {Message}", posts);
                 if (posts == null)
                 {
                     return NotFound();
@@ -70,9 +58,9 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            //var employeeDetail = await _context.EmployeeDetails.FindAsync(id);
-            //EmployeeDetailHandler employeeHandler = new EmployeeDetailHandler(_context);
             EmployeeDetail employeeDetail = await _handler.GetEmployeeDetail(id);
+
+            _logger.LogInformation("Message displayed: {Message}", employeeDetail);
 
             if (employeeDetail == null)
             {
@@ -96,12 +84,9 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
 
-            //_context.Entry(employeeDetail).State = EntityState.Modified;
-            //var x = await _handler.PutEmployeeDetailAsync(id,employeeDetail);
-
             try
             {
-                var x = await _handler.PutEmployeeDetailAsync(id, employeeDetail);
+                await _handler.PutEmployeeDetailAsync(id, employeeDetail);
 
                
             }
@@ -131,9 +116,6 @@ namespace WebAPI.Controllers
                     var eId = await _handler.PostEmployeeDetail(employeeDetail);
                     if (eId >= 0)
                     {
-                        //_context.EmployeeDetails.Add(employeeDetail);
-                        //await _context.SaveChangesAsync();
-                        //return Ok(eId);
                         return CreatedAtAction("GetEmployeeDetail", new { id = employeeDetail.EId }, employeeDetail);
                     }
                     else
@@ -162,14 +144,6 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
 
-            // var employeeDetail = await _handler.EmployeeDetails.FindAsync(id);
-            // if (employeeDetail == null)
-            // {
-            //    return NotFound();
-            // }
-
-            // _context.EmployeeDetails.Remove(employeeDetail);
-            // await _context.SaveChangesAsync();
             try
             {
                 result = await _handler.DeleteEmployeeDetail(id);
@@ -183,7 +157,6 @@ namespace WebAPI.Controllers
             {
                 return BadRequest();
             }
-          //return Ok(employeeDetail);
         }
 
       

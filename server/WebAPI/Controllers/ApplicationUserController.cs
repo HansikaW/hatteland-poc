@@ -18,8 +18,8 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ApplicationUserController : ControllerBase
     {
-        private UserManager<ApplicationUser> _userManager;
-        private SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationSettings _appSettings;
 
         public ApplicationUserController(UserManager<ApplicationUser>  userManager, SignInManager<ApplicationUser> signInManager,IOptions<ApplicationSettings> appSettings)
@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw ex ;
             }
         }
 

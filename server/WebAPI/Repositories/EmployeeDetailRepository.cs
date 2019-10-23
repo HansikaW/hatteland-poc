@@ -10,7 +10,7 @@ namespace WebAPI.Repositories
 {
     public class EmployeeDetailRepository : IEmployeeDetailRepository
     {
-        private AuthenticationContext _context;
+        private readonly AuthenticationContext _context;
 
         public EmployeeDetailRepository(AuthenticationContext context)
         {

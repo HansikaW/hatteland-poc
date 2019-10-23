@@ -20,24 +20,30 @@ using WebAPI.Data;
 using WebAPI.Handler;
 using WebAPI.Repositories;
 using AutoMapper;
-//using AutoMapper;
+using Microsoft.Extensions.Logging.Console;
 
 namespace WebAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILogger _logger;
+        public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
             Configuration = configuration;
+            _logger = logger;
+        
         }
 
         public IConfiguration Configuration { get; }
+
+        private static ILogger<ConsoleLoggerProvider> AppLogger = null;
+        private static ILoggerFactory loggerFactory = null;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             //Inject AppSettings
-            services.Configure< ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+             services.Configure< ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
@@ -53,8 +59,6 @@ namespace WebAPI
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<AuthenticationContext>();
 
-            //services.AddAutoMapper(typeof(Startup));
-
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -64,8 +68,6 @@ namespace WebAPI
                 options.Password.RequiredLength = 4;
             }
             );
-
-           // services.AddCors();
 
             services.AddCors(options =>
             {
@@ -79,11 +81,20 @@ namespace WebAPI
             IMapper _mapper = Mapper.Mapper.GetMapper();
             services.AddSingleton(_mapper);
 
+            //loger
+            
+            services.AddLogging(builder => builder
+             .AddConsole()
+             .AddFilter(level => level >= LogLevel.Trace)
+             );
+            loggerFactory = services.BuildServiceProvider().GetService<ILoggerFactory>();
+            AppLogger = loggerFactory.CreateLogger<ConsoleLoggerProvider>();
+
 
             //Jwt Authentication
 
             var config = Configuration["ApplicationSettings:JWT_Secret"].ToString();
-
+            
             var key = Encoding.UTF8.GetBytes(config);
 
             services.AddAuthentication(x =>
@@ -106,6 +117,8 @@ namespace WebAPI
             });
 
             services.AddTransient<IEmployeeDetailsHandler, EmployeeDetailHandler>();
+            _logger.LogInformation("Added TodoRepository to services");
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -123,8 +136,8 @@ namespace WebAPI
 
             if (env.IsDevelopment())
             {
+                _logger.LogInformation("In Development environment");
                 app.UseDeveloperExceptionPage();
-
             }
 
             app.UseCors(builder =>
@@ -133,9 +146,8 @@ namespace WebAPI
             .AllowAnyMethod()
             );
 
-            app.UseAuthentication();
-
             app.UseMvc();
+
         }
     }
 }

@@ -31,7 +31,7 @@ namespace WebAPITestProject
                 {
                     EId = 1,
                     EmployeeName = "Hansika",
-                    PhoneNo = "0712648744",
+                    PhoneNo = "0712656744",
                     BDay ="01/12",
                     Nic= "12345V"
                 },
@@ -108,7 +108,7 @@ namespace WebAPITestProject
             {
                 EId = 1,
                 EmployeeName = "Hansika",
-                PhoneNo = "0712648744",
+                PhoneNo = "0712656744",
                 BDay = "01/12",
                 Nic = "12345V"
             };
@@ -128,7 +128,7 @@ namespace WebAPITestProject
             {
                 EId = 1,
                 EmployeeName = "Hansika",
-                PhoneNo = "0712648744",
+                PhoneNo = "0712656744",
                 BDay = "01/12",
                 Nic = "12345V"
             };
@@ -148,7 +148,7 @@ namespace WebAPITestProject
             {
                 EId = 1,
                 EmployeeName = "Hansika",
-                PhoneNo = "0712648744",
+                PhoneNo = "0712656744",
                 BDay = "01/12",
                 Nic = "12345V"
             };

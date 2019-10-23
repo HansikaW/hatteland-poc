@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.AspNetCore.Hosting;
 using WebAPI;
 using Microsoft.Extensions.Configuration;
+using System.Net.Http.Headers;
 
 namespace WebAPIIntegrationTestProject
 {
@@ -14,7 +15,7 @@ namespace WebAPIIntegrationTestProject
         public HttpClient Client { get; private set; }
 
         private readonly TestServer _server;
-        private readonly HttpClient _client;
+        //private readonly HttpClient _client;
 
         public TestClientProvider()
         {
@@ -31,10 +32,9 @@ namespace WebAPIIntegrationTestProject
 
             Client = _server.CreateClient();
 
-            //var server = new TestServer(new WebHostBuilder().UseEnvironment("Development").UseStartup<Startup>());
-            
-            //Client = server.CreateClient();
+            Client.DefaultRequestHeaders.Accept.Add(
+              new MediaTypeWithQualityHeaderValue("application/json"));
         }
-        
+
     }
 }
