@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+    <ProjectGuid>8344b008-40df-4870-8871-5ff03c552394</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
