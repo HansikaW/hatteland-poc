@@ -10,5 +10,5 @@
 
 ### Integration tests
 
-- [Jenkins] This is for test purpose with new secret key
+- This is for test purpose with new secret key
 
