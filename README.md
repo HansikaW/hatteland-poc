@@ -10,6 +10,6 @@
 
 ### Integration tests
 
-for test purpose with new secret key
+for test purpose --> new secret key
 
 
