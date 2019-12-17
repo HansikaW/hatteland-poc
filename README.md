@@ -10,7 +10,5 @@
 
 ### Integration tests
 
-### E2E
-
 
 
