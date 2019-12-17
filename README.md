@@ -10,6 +10,5 @@
 
 ### Integration tests
 
-for test purpose --> new secret key
 
 
