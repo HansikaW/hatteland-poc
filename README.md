@@ -10,4 +10,3 @@
 
 ### Integration tests
 
-Test webhook
