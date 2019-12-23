@@ -10,5 +10,4 @@
 
 ### Integration tests
 
-This is for test purpose 
 
