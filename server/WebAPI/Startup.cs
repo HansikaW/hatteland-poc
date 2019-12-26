@@ -48,7 +48,7 @@ namespace WebAPI
                 });    
 
             services.AddDbContext<AuthenticationContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<AuthenticationContext>();
@@ -82,7 +82,8 @@ namespace WebAPI
 
             //Jwt Authentication
 
-            var config = Configuration["ApplicationSettings:JWT_Secret"].ToString();
+            //var config = Configuration["ApplicationSettings:JWT_Secret"].ToString();
+            var config = Configuration.GetValue<string>("ApplicationSettings:JWT_Secret");
 
             var key = Encoding.UTF8.GetBytes(config);
 
