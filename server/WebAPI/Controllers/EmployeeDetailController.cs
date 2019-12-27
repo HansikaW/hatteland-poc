@@ -10,20 +10,9 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    /* public class EmployeeDetailController : ControllerBase
-     {
-         private readonly AuthenticationContext _context;
-
-         public EmployeeDetailController(AuthenticationContext context)
-         {
-             _context = context;
-         }*/
-
+    
     public class EmployeeDetailController : ControllerBase
     {
-        // private IEmployeeDetailsHandler _employeeHandler { get; set; }
-        // private readonly IEmployeeDetailsHandler _handler;
-        //private readonly AuthenticationContext _context;
         private IEmployeeDetailsHandler _handler;
 
 
@@ -33,18 +22,9 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/EmployeeDetail
-        // [HttpGet]
-        /* public IEnumerable<EmployeeDetail> GetEmployeeDetails()
-         {
-             return _context.EmployeeDetails;
-         }*/
-
-        // GET: api/EmployeeDetail
         [HttpGet]
         public async Task<ActionResult> GetEmployeeDetails()
         {
-            // var employeeDetails = await _handler.GetEmployeeDetailsAsync();
-            // return (employeeDetails);
             try
             {
                 var posts = await _handler.GetEmployeeDetails();
@@ -70,8 +50,6 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            //var employeeDetail = await _context.EmployeeDetails.FindAsync(id);
-            //EmployeeDetailHandler employeeHandler = new EmployeeDetailHandler(_context);
             EmployeeDetail employeeDetail = await _handler.GetEmployeeDetail(id);
 
             if (employeeDetail == null)
@@ -82,7 +60,7 @@ namespace WebAPI.Controllers
             return Ok(employeeDetail);
         }
 
-        //// PUT: api/EmployeeDetail/5
+        // PUT: api/EmployeeDetail/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployeeDetail([FromRoute] int id, [FromBody] EmployeeDetail employeeDetail)
         {
@@ -95,9 +73,6 @@ namespace WebAPI.Controllers
             {
                 return BadRequest();
             }
-
-            //_context.Entry(employeeDetail).State = EntityState.Modified;
-            //var x = await _handler.PutEmployeeDetailAsync(id,employeeDetail);
 
             try
             {
@@ -120,7 +95,7 @@ namespace WebAPI.Controllers
             return Ok();
         }
 
-        //// POST: api/EmployeeDetail
+        // POST: api/EmployeeDetail
        [HttpPost]
        public async Task<IActionResult> PostEmployeeDetail([FromBody] EmployeeDetail employeeDetail)
         {
@@ -131,9 +106,6 @@ namespace WebAPI.Controllers
                     var eId = await _handler.PostEmployeeDetail(employeeDetail);
                     if (eId >= 0)
                     {
-                        //_context.EmployeeDetails.Add(employeeDetail);
-                        //await _context.SaveChangesAsync();
-                        //return Ok(eId);
                         return CreatedAtAction("GetEmployeeDetail", new { id = employeeDetail.EId }, employeeDetail);
                     }
                     else
@@ -162,14 +134,6 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
 
-            // var employeeDetail = await _handler.EmployeeDetails.FindAsync(id);
-            // if (employeeDetail == null)
-            // {
-            //    return NotFound();
-            // }
-
-            // _context.EmployeeDetails.Remove(employeeDetail);
-            // await _context.SaveChangesAsync();
             try
             {
                 result = await _handler.DeleteEmployeeDetail(id);
@@ -183,7 +147,6 @@ namespace WebAPI.Controllers
             {
                 return BadRequest();
             }
-          //return Ok(employeeDetail);
         }
 
       

@@ -12,7 +12,7 @@ namespace WebAPI.Controllers
     public class ValuesController : ControllerBase
     {
         public ValuesController(AuthenticationContext context)
-       {
+        {
 
         }
         // GET api/values

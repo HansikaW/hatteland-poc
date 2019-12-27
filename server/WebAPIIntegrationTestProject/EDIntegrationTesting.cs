@@ -16,8 +16,6 @@ namespace WebAPIIntegrationTestProject
             {
                 var response = await client.GetAsync("/api/EmployeeDetail");
 
-                //response.EnsureSuccessStatusCode();
-
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
         }

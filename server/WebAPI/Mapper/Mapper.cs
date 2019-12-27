@@ -10,11 +10,6 @@ namespace WebAPI.Mapper
 {
     public class Mapper : Profile
     {
-        //public Mapper()
-        //{
-        //    CreateMap<EmployeeDetailEntity, EmployeeDetail>().ReverseMap();
-        //}
-
         public static IMapper GetMapper()
         {
             var config = new MapperConfiguration(cfg =>

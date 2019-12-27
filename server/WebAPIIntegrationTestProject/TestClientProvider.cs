@@ -30,10 +30,6 @@ namespace WebAPIIntegrationTestProject
            .UseStartup<Startup>());
 
             Client = _server.CreateClient();
-
-            //var server = new TestServer(new WebHostBuilder().UseEnvironment("Development").UseStartup<Startup>());
-            
-            //Client = server.CreateClient();
         }
         
     }

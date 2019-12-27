@@ -53,8 +53,6 @@ namespace WebAPI
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<AuthenticationContext>();
 
-            //services.AddAutoMapper(typeof(Startup));
-
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -64,8 +62,6 @@ namespace WebAPI
                 options.Password.RequiredLength = 4;
             }
             );
-
-           // services.AddCors();
 
             services.AddCors(options =>
             {
