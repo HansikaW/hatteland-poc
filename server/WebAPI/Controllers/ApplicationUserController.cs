@@ -22,11 +22,11 @@ namespace WebAPI.Controllers
         private SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationSettings _appSettings;
 
-        public ApplicationUserController(UserManager<ApplicationUser>  userManager, SignInManager<ApplicationUser> signInManager,IOptions<ApplicationSettings> appSettings)
+        public ApplicationUserController(UserManager<ApplicationUser>  userManager, SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings)
          {
              _userManager = userManager;
              _signInManager = signInManager;
-            _appSettings = appSettings.Value;
+             _appSettings = appSettings.Value;
          }  
 
         [HttpPost]
