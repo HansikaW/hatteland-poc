@@ -24,7 +24,6 @@ namespace WebAPI.Controllers
 		{
 			_handler = handler;
 			_logger = logger;
-
 		}
 
 
@@ -40,7 +39,6 @@ namespace WebAPI.Controllers
 				{
 					return NotFound();
 				}
-
 				return Ok(posts);
 			}
 			catch (Exception)

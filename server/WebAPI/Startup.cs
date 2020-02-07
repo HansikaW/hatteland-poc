@@ -48,7 +48,7 @@ namespace WebAPI
                 });    
 
             services.AddDbContext<AuthenticationContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<AuthenticationContext>();
@@ -70,7 +70,7 @@ namespace WebAPI
             });
 
             services.AddScoped<IEmployeeDetailRepository, EmployeeDetailRepository>();
-            services.AddScoped< IEmployeeDetailsHandler, EmployeeDetailHandler>();
+            services.AddScoped<IEmployeeDetailsHandler, EmployeeDetailHandler>();
 
             IMapper _mapper = Mapper.Mapper.GetMapper();
             services.AddSingleton(_mapper);
@@ -108,8 +108,13 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+			using (var serviceScope = app.ApplicationServices.CreateScope())
+			{
+				var context = serviceScope.ServiceProvider.GetService<AuthenticationContext>();
+				context.Database.Migrate();
+			}
 
-            app.Use(async (ctx, next) =>
+			app.Use(async (ctx, next) =>
             {
                 await next();
                 if (ctx.Response.StatusCode == 204)
