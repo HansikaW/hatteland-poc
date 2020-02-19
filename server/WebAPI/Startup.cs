@@ -33,9 +33,15 @@ namespace WebAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
+			var server = Configuration["DBServer"] ?? "localhost";
+			var port = Configuration["DBPort"] ?? "1433";
+			var user = Configuration["DBUser"] ?? "SA";
+			var password = Configuration["DBPassword"] ?? "Password12!";
+			var database = Configuration["Database"] ?? "UserDB";
+
             //Inject AppSettings
             services.Configure< ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
@@ -45,12 +51,14 @@ namespace WebAPI
                     var resolver = options.SerializerSettings.ContractResolver;
                     if (resolver != null)
                         (resolver as DefaultContractResolver).NamingStrategy = null;
-                });    
+                });
 
-            services.AddDbContext<AuthenticationContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+			services.AddDbContext<AuthenticationContext>(options =>
+			options.UseSqlServer(Configuration.GetConnectionString("AzureDbConnection")));
+			//(Configuration.GetConnectionString("SqlConnection")));
+			//($"Server={server},{port};Initial Catalog={database};User ID={user};Password={password};"));
 
-            services.AddDefaultIdentity<ApplicationUser>()
+			services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<AuthenticationContext>();
 
             services.Configure<IdentityOptions>(options =>
