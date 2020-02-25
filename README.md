@@ -92,6 +92,12 @@
 Add connections from the your specified IPs that will provides access to the databases.
 
 
+## Install
+   - [Install the .NET Core SDK in jenkins container](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1904)
+   - [Install docker in Jenkins container](https://docs.docker.com/install/linux/docker-ce/debian/)
+   - [Install node and angular cli]
+	
+
 ## Jenkins pipeline
 As this is single branch repository, select pipeline as item and give pipeline name. (if your repository has multiple branches then you can move to the multibranch pipeline)
  After that mark the Github project and add your repository URL. Under the Buil Trigger, mark the GitHub hook tigger for GITScm polling as a option.
@@ -99,11 +105,7 @@ As this is single branch repository, select pipeline as item and give pipeline n
    -  should create two seperate pipelines for the client application(Angular) and the server project(.Net core)
    -  sperate jenkins pipelins scripts are attached in this repostory(jenkinsfile-client & jenkinsfile-server). 
 
-## Install
-   [Install the .NET Core SDK in jenkins container](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1904)
-   [Install docker in Jenkins container](https://docs.docker.com/install/linux/docker-ce/debian/)
-   [Install node and angular cli]
-	
+
 ## Usage
 
 ## Run tests
