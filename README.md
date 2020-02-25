@@ -44,7 +44,7 @@
 	  		
 	    docker exec -it {Jenkins-CONTAINER ID } /bin/bash
 
-	ii. create sonar-scanner directory under **both /var/jenkins_home and root directory of your local machine or VM**
+	ii. create sonar-scanner directory under **both /var/jenkins_home and root directory of your jenkins Container**
 
 	iii. download SonarQube Scanner onto the container from the sonar-scanner directory with wget:
 			
