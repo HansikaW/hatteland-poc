@@ -100,7 +100,10 @@ As this is single branch repository, select pipeline as item and give pipeline n
    -  sperate jenkins pipelins scripts are attached in this repostory(jenkinsfile-client & jenkinsfile-server). 
 
 ## Install
-
+   [Install the .NET Core SDK in jenkins container](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1904)
+   [Install docker in Jenkins container](https://docs.docker.com/install/linux/docker-ce/debian/)
+   [Install node and angular cli]
+	
 ## Usage
 
 ## Run tests
