@@ -95,7 +95,7 @@ Add connections from the your specified IPs that will provides access to the dat
 ## Install
    - [Install the .NET Core SDK in jenkins container](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1904)
    - [Install docker in Jenkins container](https://docs.docker.com/install/linux/docker-ce/debian/)
-   - [Install node and angular cli]()
+   - Install node and angular cli
 	
 
 ## Jenkins pipeline
