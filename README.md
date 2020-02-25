@@ -10,7 +10,7 @@
 
 2. Use jenkins image	
     
-		docker run -u 0 -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):$(which docker) -p 8000:8080 -v /usr/var/jenkins_home jenkins/jenkins:lts
+		docker run -u 0 -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):$(which docker) -p 8080:8080 -v /usr/var/jenkins_home jenkins/jenkins:lts
 
 3. Create user group docker within jenkins docker container
 
