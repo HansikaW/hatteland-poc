@@ -1,7 +1,5 @@
 # hatteland-poc
 
-# CICD
-
 ## Setup Jenkins Docker image:
 	
 1. Pull jenkins image
@@ -103,15 +101,5 @@ As this is single branch repository, select pipeline as item and give pipeline n
  After that mark the Github project and add your repository URL. Under the Buil Trigger, mark the GitHub hook tigger for GITScm polling as a option.
    
    -  should create two seperate pipelines for the client application(Angular) and the server project(.Net core)
-   -  sperate jenkins pipelins scripts are attached in this repostory(jenkinsfile-client & jenkinsfile-server). 
-
-
-## Usage
-
-## Run tests
-
-### Unit tests
-
-### Integration tests
-
+   -  sperate jenkins pipelins scripts are attached in this repostory(jenkinsfile-client & jenkinsfile-server).
 
