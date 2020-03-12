@@ -102,3 +102,5 @@ As this is single branch repository, select pipeline as item and give pipeline n
    
    -  should create two seperate pipelines for the client application(Angular) and the server project(.Net core)
    -  sperate jenkins pipelins scripts are attached in this repostory(jenkinsfile-client & jenkinsfile-server).
+
+
